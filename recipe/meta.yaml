@@ -1,5 +1,5 @@
 {% set name = "mettoolbox" %}
-{% set version = "7.0.1" %}
+{% set version = "7.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mettoolbox-{{ version }}.tar.gz
-  sha256: 8fe7634d6f72b50097563df5d051e869b2d714fb5fc11ee0b73129b5443cc658
+  sha256: 829cddc2e3f840d747a7ad8d629f416aaa98e02fb4e0d6a51089895d7c37e7e3
 
 build:
   entry_points:
