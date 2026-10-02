@@ -1,0 +1,66 @@
+schema_version: 1
+
+context:
+  name: mettoolbox
+  version: "7.1.4"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 026e3c569dc0613bac0692491a451181420eabe0c6945593c5f13cc28fdaaed5
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - mettoolbox = mettoolbox.mettoolbox:main
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=45
+    - setuptools-scm >=6.2
+    - wheel
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - tstoolbox
+    - cltoolbox
+    - pint
+    - numpy
+    - pyet
+    - matplotlib-base >=3.1.2
+    - scipy >=1.5.4
+    - pandas
+    - fiona
+    - pydaymet >=0.17
+
+tests:
+  - python:
+      imports:
+        - mettoolbox
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pip
+    script:
+      - mettoolbox --help
+
+about:
+  summary: mettoolbox is set of command line and Python tools for the analysis and reporting of meteorological data.
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  homepage: https://github.com/timcera/mettoolbox
+
+extra:
+  recipe-maintainers:
+    - timcera
